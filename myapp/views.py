@@ -46,3 +46,16 @@ def roll1(request):
 def show(request, roll):
     student = models.student.objects.get(id=roll)
     return render(request, 'students/show.html', {'data':student})
+
+def roll2(request):
+    if request.method == "POST":
+        id = request.POST.get('rollno')
+        return redirect(delete, roll=id)
+    return render(request, 'students/roll.html')
+
+def delete(request, roll):
+    student = models.student.objects.get(id=roll)
+    if request.method == "POST":
+        student.delete()
+        return redirect('/', roll=id)
+    return render(request, 'students/delete.html', {'data':student})
