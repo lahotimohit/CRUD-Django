@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from . import forms
+from . import models
 
 # Create your views here.
 def index(request):
@@ -15,9 +15,24 @@ def create(request):
     if request.method == "POST":
         form = forms.stuform(request.POST)
         if form.is_valid():
-            # request.session['name'] = form.cleaned_data['name']
-            # request.session['address'] = form.cleaned_data['address']
-            # request.session['course'] = form.cleaned_data['course']
-            # request.session['phone_number'] = form.cleaned_data['phone_number'] 
             form.save();
     return render(request, 'students/create.html', {'form':form})
+
+def roll(request):
+    if request.method == "POST":
+        id = request.POST.get('rollno')
+        return redirect(update, roll=id)
+    return render(request, 'students/roll.html')
+
+
+def update(request, roll):
+    student = models.student.objects.get(id=roll)
+    if request.method=='POST':
+        form = forms.stuform(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            print("Code reach here...")
+            return redirect(student_tmp)
+        else:
+            print(form.errors)
+    return render(request, 'students/update.html', {'data':student})

@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="" />
   </head>
   <body>
-    <a href="/student/create">Add New Record</a>
-    <a href="">Show Existing Record</a>
-    <a href="{% url "roll" %}">Update Record</a>
-    <a href="">Delete Record</a>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Enter your roll number" name="rollno" />
+      <button type="submit">Move Further</button>
+    </form>
     <script src="" async defer></script>
   </body>
 </html>
