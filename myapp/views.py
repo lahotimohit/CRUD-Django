@@ -36,3 +36,13 @@ def update(request, roll):
         else:
             print(form.errors)
     return render(request, 'students/update.html', {'data':student})
+
+def roll1(request):
+    if request.method == "POST":
+        id = request.POST.get('rollno')
+        return redirect(show, roll=id)
+    return render(request, 'students/roll.html')
+
+def show(request, roll):
+    student = models.student.objects.get(id=roll)
+    return render(request, 'students/show.html', {'data':student})

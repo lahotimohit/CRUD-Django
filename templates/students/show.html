@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="" />
   </head>
   <body>
-    <a href="/student/create">Add New Record</a>
-    <a href="{% url "roll1" %}">Show Existing Record</a>
-    <a href="{% url "roll" %}">Update Record</a>
-    <a href="">Delete Record</a>
+    <label>Student Name: </label>{{ data.name }}<br />
+    <label>Student Address: </label>{{ data.address }}<br />
+    <label>Student Course: </label>{{ data.course }}<br />
+    <label>Student Contact: </label>{{ data.phone_number }}<br />
     <script src="" async defer></script>
   </body>
 </html>
